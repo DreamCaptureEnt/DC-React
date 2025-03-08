@@ -13,6 +13,17 @@ import { useGSAP } from '@gsap/react';
 
 const services = [
   {
+    title: "Architectural Visualization",
+    icon: <GiHouse className="icon w-8 h-8 text-primary" />,
+    details: [
+      "3D Architectural Renders",
+      "Interior and Exterior Visualization",
+      "Virtual Tours",
+      "Building and Landscape Modeling",
+      "Photorealistic Rendering"
+    ],
+  },
+  {
     title: "3D Advertisement",
     icon: <FaCube className="icon w-8 h-8 text-primary" />,
     details: [
@@ -23,6 +34,17 @@ const services = [
       "Professional Content"
     ],
   },
+  {
+    title: "Augmented Reality Visualization",
+    icon: <GiVrHeadset className="icon w-8 h-8 text-primary" />,
+    details: [
+      "AR-Based Architectural Renders",
+      "Interactive Interior and Exterior Visualization",
+      "Real-Time Virtual Tours in AR",
+      "3D Building and Landscape Projection",
+      "AR-Enhanced Photorealistic Rendering"
+    ],
+  },  
   {
     title: "Graphic Design",
     icon: <AiOutlineAppstoreAdd className="icon w-8 h-8 text-primary" />,
@@ -78,17 +100,7 @@ const services = [
       "Augmented Reality (AR) Demos"
     ],
   },
-  {
-    title: "Architectural Visualization",
-    icon: <GiHouse className="icon w-8 h-8 text-primary" />,
-    details: [
-      "3D Architectural Renders",
-      "Interior and Exterior Visualization",
-      "Virtual Tours",
-      "Building and Landscape Modeling",
-      "Photorealistic Rendering"
-    ],
-  },
+
 ];
 
 const Services = () => {
