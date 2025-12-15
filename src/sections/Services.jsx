@@ -6,7 +6,7 @@ import { FaCube } from 'react-icons/fa';
 import { AiOutlineRocket } from 'react-icons/ai';
 import { FaVideo } from 'react-icons/fa';
 import { RiMovie2Line } from 'react-icons/ri';
-import { GiHouse } from 'react-icons/gi';
+import { GiHouse, GiVrHeadset } from 'react-icons/gi';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
@@ -35,14 +35,14 @@ const services = [
     ],
   },
   {
-    title: "Augmented Reality Visualization",
+    title: "Augmented Reality",
     icon: <GiVrHeadset className="icon w-8 h-8 text-primary" />,
     details: [
-      "AR-Based Architectural Renders",
-      "Interactive Interior and Exterior Visualization",
+      "AR-Based Architectures",
+      "Interior and Exterior Visualization",
+      "3D Apartment Visualization",
       "Real-Time Virtual Tours in AR",
-      "3D Building and Landscape Projection",
-      "AR-Enhanced Photorealistic Rendering"
+      "3D Building/Landscape Projection"
     ],
   },  
   {

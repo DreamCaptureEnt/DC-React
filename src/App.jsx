@@ -1,41 +1,84 @@
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./sections/Header";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Portfolio from "./sections/Portfolio";
-import Contact from "./sections/Contact";
-import Services from "./sections/Services"
-import { ReactLenis } from "@studio-freight/react-lenis";
+import Home from "./Home";
+import CareersPage from "./sections/Careers";
+import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import Preloader from "./components/Preloader";
 import { useEffect, useState } from "react";
-import transition from "./components/transition";
-import Chatbot from './components/Chatbot';
-
+import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
   const [isLoading, setLoading] = useState(true);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+  const location = useLocation();
+  const lenis = useLenis();
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, [isLoading]);
+    if (!hasLoadedOnce) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        setHasLoadedOnce(true);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [hasLoadedOnce]);
+
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+  }, [location.pathname, lenis]);
 
   return (
-    <ReactLenis root>
-      {isLoading &&
-        <Preloader />
-      }
-          <Header />
-          <Hero />
-          {/* <About /> */}
-          <Services/>
-          <Portfolio />
-          <Contact />
-          {/* <Chatbot/> */}
-    </ReactLenis>
+    <>
+      {isLoading && !hasLoadedOnce && <Preloader />}
+
+      <ReactLenis root>
+        <div
+          className="min-h-screen"
+          style={{
+            background:
+              "radial-gradient(circle, #01092d 10%, #01092d 50%, #01092d 100%)",
+          }}
+        >
+          {location.pathname === "/" && <Header />}
+
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route
+                path="/"
+                element={
+                  <motion.div
+                    className="min-h-screen"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                  >
+                    <Home />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/careers"
+                element={
+                  <motion.div
+                    className="min-h-screen"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                  >
+                    <CareersPage />
+                  </motion.div>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </div>
+      </ReactLenis>
+    </>
   );
 }
 
-export default transition(App);
-
-
+export default App;
