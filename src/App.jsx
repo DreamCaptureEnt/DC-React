@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./sections/Header";
 import Home from "./Home";
 import CareersPage from "./sections/Careers";
+import TechnologyPage from "./sections/TechnologyPage"; // ← new
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import Preloader from "./components/Preloader";
 import { useEffect, useState } from "react";
@@ -29,18 +30,25 @@ function App() {
     }
   }, [location.pathname, lenis]);
 
+  // Pages that use their own header / background
+  const isStandalonePage = ["/technology"].includes(location.pathname);
+
   return (
     <>
       {isLoading && !hasLoadedOnce && <Preloader />}
-
       <ReactLenis root>
         <div
           className="min-h-screen"
-          style={{
-            background:
-              "radial-gradient(circle, #01092d 10%, #01092d 50%, #01092d 100%)",
-          }}
+          style={
+            isStandalonePage
+              ? {} // TechnologyPage manages its own background
+              : {
+                  background:
+                    "radial-gradient(circle, #01092d 10%, #01092d 50%, #01092d 100%)",
+                }
+          }
         >
+          {/* Only show the shared Header on home + careers */}
           {location.pathname === "/" && <Header />}
 
           <AnimatePresence mode="wait">
@@ -59,6 +67,7 @@ function App() {
                   </motion.div>
                 }
               />
+
               <Route
                 path="/careers"
                 element={
@@ -70,6 +79,22 @@ function App() {
                     transition={{ duration: 0.35 }}
                   >
                     <CareersPage />
+                  </motion.div>
+                }
+              />
+
+              {/* ─── Technology page ─── */}
+              <Route
+                path="/technology"
+                element={
+                  <motion.div
+                    className="min-h-screen"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                  >
+                    <TechnologyPage />
                   </motion.div>
                 }
               />

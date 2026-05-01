@@ -15,6 +15,8 @@
     "@lottiefiles/react-lottie-player": "^3.5.4",
     "@studio-freight/react-lenis": "^0.0.47",
     "autoprefixer": "^10.4.20",
+    "baseline-browser-mapping": "^2.10.24",
+    "caniuse-lite": "^1.0.30001791",
     "emailjs-com": "^3.2.0",
     "express": "^4.21.1",
     "firebase": "^10.13.2",
