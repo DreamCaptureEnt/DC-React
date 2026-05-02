@@ -1,5 +1,6 @@
 import React from 'react';
-import Slider from 'react-slick';
+import SliderLib from 'react-slick';
+
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 import { FaFilm } from 'react-icons/fa';
 import { FaCube } from 'react-icons/fa';
@@ -10,6 +11,9 @@ import { GiHouse, GiVrHeadset } from 'react-icons/gi';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
+
+
+const Slider = SliderLib.default || SliderLib;
 
 const services = [
   {
