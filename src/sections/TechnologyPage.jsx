@@ -264,7 +264,7 @@ const SERVICES = [
 ];
 
 const PROJECTS = [
-  { name: "ZuessSkills",   category: "Ed-Tech Platform",      desc: "Full-stack learning platform with course management, live cohorts & payments.", href: "https://www.zuesskills.com/", tag: "Web App",       year: "2024" },
+  { name: "Laser Repairs",   category: "Ed-Tech Platform",      desc: "Full-stack learning platform with course management, live cohorts & payments.", tag: "Web App",       year: "2024" },
   { name: "Jaglate",       category: "Chocolate E-Commerce",  desc: "Premium chocolate brand storefront with custom product configurator & gifting flow.", href: "https://jaglate.com",        tag: "E-Commerce",    year: "2024" },
   { name: "Arvind Snacks", category: "FMCG Store",            desc: "Snacks brand digital storefront with regional delivery and WhatsApp checkout.",      href: "https://arvind-snacks.com",  tag: "E-Commerce",    year: "2024" },
   { name: "Rani Paints",   category: "Paint Company",         desc: "Corporate website + product catalogue with color visualizer for interior design.",   href: "https://ranipaints.in/",     tag: "Web + Branding",year: "2024" },
