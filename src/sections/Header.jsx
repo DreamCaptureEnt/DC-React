@@ -11,6 +11,10 @@ function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
+  // ── Hide header entirely on these pages ──
+  const HIDDEN_PATHS = ["/careers"];
+  if (HIDDEN_PATHS.includes(location.pathname)) return null;
+
   const navVariants = {
     initial: { scaleY: 0 },
     animate: {
@@ -29,7 +33,6 @@ function Header() {
     { title: "Portfolio",  link: "portfolio",   type: "scroll" },
     { title: "Contact",    link: "contact",     type: "scroll" },
     { title: "Careers",    link: "/careers",    type: "route"  },
-    // ↓ Technology — visually distinct pill
     { title: "Technology", link: "/technology", type: "route", highlight: true },
   ];
 
@@ -52,7 +55,6 @@ function Header() {
       const heroSection = document.getElementById("home");
       if (heroSection) {
         const heroRect = heroSection.getBoundingClientRect();
-        // kept for future use — isHeroSection logic preserved
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -93,7 +95,6 @@ function Header() {
           <div key={index} className="flex flex-col items-center">
             {link.type === "route" ? (
               link.highlight ? (
-                /* ── Technology pill ── */
                 <RouterLink
                   to={link.link}
                   className="cursor-pointer font-poppins text-md font-bold px-3 py-1 rounded-sm transition-all duration-300 hover:scale-105"
@@ -141,6 +142,7 @@ function Header() {
                 {link.title}
               </ScrollLink>
             ) : (
+              // ── From other pages: navigate to /#section ──
               <RouterLink
                 to={`/#${link.link}`}
                 className="cursor-pointer font-poppins text-md text-white hover:scale-105 hover:text-amber-500 transition-all ease-in-out"
@@ -150,7 +152,6 @@ function Header() {
               </RouterLink>
             )}
 
-            {/* Animated underline — skip for highlight pill */}
             {!link.highlight &&
               ((link.type === "scroll" &&
                 selectedLink === link.link &&

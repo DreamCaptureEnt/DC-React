@@ -2,11 +2,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./sections/Header";
 import Home from "./Home";
 import CareersPage from "./sections/Careers";
-import TechnologyPage from "./sections/TechnologyPage"; // ← new
+import TechnologyPage from "./sections/TechnologyPage"; // ← ADD
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import Preloader from "./components/Preloader";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+
+// ─── Add any new pages here and the header auto-appears ───
+const HEADER_PATHS = ["/", "/careers", "/technology"];
 
 function App() {
   const [isLoading, setLoading] = useState(true);
@@ -30,26 +33,22 @@ function App() {
     }
   }, [location.pathname, lenis]);
 
-  // Pages that use their own header / background
-  const isStandalonePage = ["/technology"].includes(location.pathname);
+  // FIX: was `location.pathname === "/"` — now covers all defined pages
+  const showHeader = HEADER_PATHS.includes(location.pathname);
 
   return (
     <>
       {isLoading && !hasLoadedOnce && <Preloader />}
+
       <ReactLenis root>
         <div
           className="min-h-screen"
-          style={
-            isStandalonePage
-              ? {} // TechnologyPage manages its own background
-              : {
-                  background:
-                    "radial-gradient(circle, #01092d 10%, #01092d 50%, #01092d 100%)",
-                }
-          }
+          style={{
+            background:
+              "radial-gradient(circle, #01092d 10%, #01092d 50%, #01092d 100%)",
+          }}
         >
-          {/* Only show the shared Header on home + careers */}
-          {location.pathname === "/" && <Header />}
+          {showHeader && <Header />}
 
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -67,7 +66,6 @@ function App() {
                   </motion.div>
                 }
               />
-
               <Route
                 path="/careers"
                 element={
@@ -82,8 +80,7 @@ function App() {
                   </motion.div>
                 }
               />
-
-              {/* ─── Technology page ─── */}
+              {/* ← NEW ROUTE */}
               <Route
                 path="/technology"
                 element={
